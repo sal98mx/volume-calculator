@@ -1,0 +1,39 @@
+body{
+    font-size: 1.3em;
+    font-family: inherit;
+}
+h1{
+    text-align: center;
+}
+table, th, td{
+    border: 1px solid black ;
+    height: 25px;
+}
+.form{
+   padding: 1.5rem;
+    border: 5px solid black;
+    width: 75%;
+    background-color: aliceblue;
+}
+input[type=reset] {
+    background-color: #3f78d4;
+    color: white;
+    cursor: pointer;
+    height: 2rem;
+    border-radius: 5px;
+    width: 12rem;
+    font-size: 1.3rem;
+}
+input[type=submit] {
+    cursor: pointer;
+    background-color: #3f78d4;
+    border: 3px solid lightblue;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 1.2rem;
+    color: white;
+    width: auto;
+}
+.units, .userInput, .shapeDiv {
+    padding: 10px;
+}

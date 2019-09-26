@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Volume Calculator</title>
+</head>
+
+<body>
+    <h1>Welcome to your trusty Volume calculator</h1>
+    <div class="form">
+        <h2>This website will find the volume for a Cylinder, Sphere or Cone</h2>
+        <form action="javascript.js" name="volumeFinder" method="GET">
+            <!--units of mesurements-->
+            <div class="units">
+                Select the units (English or SI)<br>
+                <input type="radio" name="units" onchange = "handleChange1();" id="si" value="si">
+                <label for="si">SI</label>
+                <input type="radio" name="units" onchange = "handleChange2();"id="english" value="metric">
+                <label for="english">English</label>
+            </div>
+
+            <!--shape choice-->
+            <div class="shapeDiv">
+                    <label for="id">Select the shape</label>
+                    <select name="shape" id="id">
+                        <option value="cylinder">Cylinder</option>
+                        <option value="sphere">Sphere</option>
+                        <option value="cone">Cone</option>
+                    </select>
+        
+            </div>
+            
+            <!--user input-->
+            <div class="userInput">
+                <label for="radius">Enter the radius</label>
+                <input type="number" name="radius" id="radius"><br>
+                <label for="height">For the cylinder and cone, Enter the height</label>
+                <input type="number" name="height" id="height">
+            </div>
+            <input type="reset" value="Reset the form">
+          
+        
+
+        <h2>Results</h2>
+        <p>You selected <span id="unitsDisplay"></span>.</p>
+        <p>You selected to find the values for a <span id = "shapeDisplay"></span> shape.</p>
+        
+        <!--results table-->
+        <table>
+         <tr>
+             <th>Shape</th>
+             <th>Radius</th>
+             <th>Height</th>
+             <th>Volume</th>
+         </tr>
+         <tr>
+             <td></td>
+             <td class="unitsOfMesurements"></td>
+             <td class="unitsOfMesurements"></td>
+             <td id="unitsOfMesurementsV"></td>
+         </tr>
+         <tr>
+             <td id ="shapeDisplayTable"></td>
+             <td id="radiusDisplay"></td>
+             <td id="heightDisplay"></td>
+             <td id = "display"></td>
+         </tr>
+        </table><br>
+        <input type="submit" value="Click to calculate the results">
+     </form>
+    </div>
+
+    <script>
+        /* SI */
+        function handleChange1(){
+            document.getElementById("unitsDisplay").innerHTML = (" SI units");
+            document.getElementById("unitsOfMesurementsV").innerHTML = ("(m^3)");
+            var unitsOf = document.getElementsByClassName("unitsOfMesurements");
+            var i;
+            for(i=0; i < unitsOf.length; i++){
+                unitsOf[i].innerHTML = ("(m)");
+            }
+        };
+
+         /* English */
+         function handleChange2(){
+            document.getElementById("unitsDisplay").innerHTML = (" English units");
+            document.getElementById("unitsOfMesurementsV").innerHTML = ("(ft^3)");
+            var unitsOf = document.getElementsByClassName("unitsOfMesurements");
+            var i;
+            for(i=0; i < unitsOf.length; i++){
+                unitsOf[i].innerHTML = ("(ft)");
+            }
+        };
+
+        document.forms["volumeFinder"].onsubmit = function () {
+
+            /* get parameters */
+            var radius = document.getElementById("radius").value;
+            var height = document.getElementById("height").value;
+            var selectedValue = document.getElementById("id");
+            var value = selectedValue[selectedValue.selectedIndex].value;
+
+            /* volume formulas */
+            var cylinderVolume = radius * radius * 3.14 * height;
+            var sphereVolume = ((4 / 3) * 3.14 * (radius * radius * radius));
+            var coneVolume = 3.14 * radius * radius * (height / 3);
+
+            if (value == "sphere") {
+                /*Shape*/
+                document.getElementById("shapeDisplay").innerHTML = ("Sphere");
+                document.getElementById("shapeDisplayTable").innerHTML = ("Sphere");
+                /*Radius*/
+                document.getElementById("radiusDisplay").innerHTML =(radius);
+                /*Height*/
+                document.getElementById("heightDisplay").innerHTML = (height);
+                /*volume*/
+                document.getElementById("display").innerHTML = (sphereVolume);
+                
+            }
+            else if (value == "cylinder") {
+                document.getElementById("shapeDisplay").innerHTML = ("Cylinder");
+                document.getElementById("shapeDisplayTable").innerHTML = ("cylinder");
+                document.getElementById("radiusDisplay").innerHTML =(radius);
+                document.getElementById("heightDisplay").innerHTML = (height);
+
+                document.getElementById("display").innerHTML = (cylinderVolume);
+            
+            }
+            else if (value == "cone") {
+                document.getElementById("shapeDisplay").innerHTML = ("Cone");
+                document.getElementById("shapeDisplayTable").innerHTML = ("cone");
+                document.getElementById("radiusDisplay").innerHTML =(radius);
+                document.getElementById("heightDisplay").innerHTML = (height);
+
+                document.getElementById("display").innerHTML = (coneVolume);
+               
+            }
+
+
+            return false;
+        }
+    </script>
+</body>
+
+</html>
+<!--V=4/3πr3-->
